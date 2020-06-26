@@ -1,0 +1,70 @@
+<div class="row btn-page">
+    <div class="col-sm-12">
+        <app-card cardClass="test-cl" cardTitle="Manage Product">
+            <div style="margin-top: 20px;">
+                <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-sm-1" *ngIf="!!imageToShow && imageToShow != ''">
+                            <img src="{{imageToShow}}" alt="" width="70" height="60" style="border-radius: 50%;">
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*"
+                                        (change)="changeListener($event.target.files)">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose Product Image</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">Product Name</label>
+                                <input type="text" class="form-control" id="ProductName" aria-describedby="ProductName"
+                                    placeholder="Enter Product Name" formControlName="ProductName" [ngClass]="{ 'is-invalid': (getControls('ProductName').dirty || getControls('ProductName').touched) 
+                                    && getControls('ProductName').invalid }" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Categories</label>
+                            <tag-input name="categories" formControlName='Categories'></tag-input>
+                            <small class="text-info">Press enter after typing Categories.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="age">Price</label>
+                                <input type="number" class="form-control" id="price" aria-describedby="price"
+                                    placeholder="Enter Price" formControlName="Price" [ngClass]="{ 'is-invalid': (getControls('Price').dirty || getControls('Price').touched) 
+                                    && getControls('Price').invalid }" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Stock</label>
+                                <input type="text" class="form-control" id="Stock" aria-describedby="Stock"
+                                    placeholder="Enter Stock" formControlName="Stock" [ngClass]="{ 'is-invalid': (getControls('Stock').dirty || getControls('Stock').touched) 
+                                    && getControls('Stock').invalid }" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=col-md-12>
+                            <label>Description</label>
+                            <angular-editor [config]="config" formControlName="Description"></angular-editor>
+                        </div>
+                    </div>
+                    <div class="row" style="float: right;margin-bottom: 20px;">
+                        <button type="button" class="btn btn-outline-dark btn-md pull-right"
+                            (click)="back()">Back</button>&nbsp;
+                        <button type="submit" class="btn btn-primary btn-md pull-right">Save &
+                            Exit</button>&nbsp;&nbsp;
+                    </div>
+                </form>
+            </div>
+        </app-card>
+    </div>
+</div>

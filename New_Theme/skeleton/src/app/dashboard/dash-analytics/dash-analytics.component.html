@@ -1,0 +1,208 @@
+<div class="row">
+  <!-- amount start -->
+  <div class="col-md-6 col-xl-4">
+    <app-card [hidHeader]="true" cardClass="amount-card overflow-hidden" blockClass="p-0">
+      <div class="p-20 p-b-0">
+        <h2 class="f-w-400">$23,567</h2>
+        <p class="text-muted f-w-600 f-16"><span class="text-c-blue">Amount</span> Processed</p>
+      </div>
+      <app-apex-chart chartID="amount-processed" [chartConfig]="this.amountProcessedChartData"></app-apex-chart>
+    </app-card>
+  </div>
+  <div class="col-md-6 col-xl-4">
+    <app-card [hidHeader]="true" cardClass="amount-card overflow-hidden" blockClass="p-0">
+      <div class="p-20 p-b-0">
+        <h2 class="f-w-400">$14,552</h2>
+        <p class="text-muted f-w-600 f-16"><span class="text-c-green">Amount</span> Spent</p>
+      </div>
+      <app-apex-chart chartID="amount-spent" [chartConfig]="this.amountSpentChartData"></app-apex-chart>
+    </app-card>
+  </div>
+  <div class="col-md-12 col-xl-4">
+    <app-card [hidHeader]="true" cardClass="amount-card overflow-hidden" blockClass="p-0">
+      <div class="p-20 p-b-0">
+        <h2 class="f-w-400">$31,156</h2>
+        <p class="text-muted f-w-600 f-16"><span class="text-c-yellow">Profit</span> Processed</p>
+      </div>
+      <app-apex-chart chartID="profit-processed" [chartConfig]="this.profitProcessedChartData"></app-apex-chart>
+    </app-card>
+  </div>
+  <!-- amount end -->
+
+  <!-- page statistic card start -->
+  <div class="col-lg-3 col-md-6">
+    <app-card [hidHeader]="true" [isCardFooter]="true" footerClass="bg-c-yellow">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h4 class="text-c-yellow">$30200</h4>
+          <h6 class="text-muted m-b-0">All Earnings</h6>
+        </div>
+        <div class="col-4 text-right">
+          <i class="feather icon-bar-chart-2 f-28"></i>
+        </div>
+      </div>
+      <div class="app-card-footer">
+        <div class="row align-items-center">
+          <div class="col-9">
+            <p class="text-white m-b-0">% change</p>
+          </div>
+          <div class="col-3 text-right">
+            <i class="feather icon-trending-up text-white f-16"></i>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <app-card [hidHeader]="true" [isCardFooter]="true" footerClass="bg-c-green">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h4 class="text-c-green">290+</h4>
+          <h6 class="text-muted m-b-0">Page Views</h6>
+        </div>
+        <div class="col-4 text-right">
+          <i class="feather icon-file-text f-28"></i>
+        </div>
+      </div>
+      <div class="app-card-footer">
+        <div class="row align-items-center">
+          <div class="col-9">
+            <p class="text-white m-b-0">% change</p>
+          </div>
+          <div class="col-3 text-right">
+            <i class="feather icon-trending-up text-white f-16"></i>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <app-card [hidHeader]="true" [isCardFooter]="true" footerClass="bg-c-red">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h4 class="text-c-red">145</h4>
+          <h6 class="text-muted m-b-0">Task</h6>
+        </div>
+        <div class="col-4 text-right">
+          <i class="feather icon-calendar f-28"></i>
+        </div>
+      </div>
+      <div class="app-card-footer">
+        <div class="row align-items-center">
+          <div class="col-9">
+            <p class="text-white m-b-0">% change</p>
+          </div>
+          <div class="col-3 text-right">
+            <i class="feather icon-trending-down text-white f-16"></i>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-3 col-md-6">
+    <app-card [hidHeader]="true" [isCardFooter]="true" footerClass="bg-c-blue">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h4 class="text-c-blue">500</h4>
+          <h6 class="text-muted m-b-0">Downloads</h6>
+        </div>
+        <div class="col-4 text-right">
+          <i class="feather icon-thumbs-down f-28"></i>
+        </div>
+      </div>
+      <div class="app-card-footer">
+        <div class="row align-items-center">
+          <div class="col-9">
+            <p class="text-white m-b-0">% change</p>
+          </div>
+          <div class="col-3 text-right">
+            <i class="feather icon-trending-down text-white f-16"></i>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <!-- page statistic card end -->
+
+  <!-- real-time data of visits start -->
+  <div class="col-xl-8 col-md-12">
+    <app-card cardTitle="Real-time Data of Visits" [options]="false">
+      <div class="row my-2">
+        <div class="col-auto">
+          <h4 class="m-0">563,756<i class="feather icon-arrow-up text-c-green"></i></h4>
+          <span>Visits per Day</span>
+        </div>
+        <div class="col-auto">
+          <h4 class="m-0">78,569<i class="feather icon-arrow-down text-c-red"></i></h4>
+          <span>Total Visitors</span>
+        </div>
+        <div class="col">
+          <h4 class="m-0">40.05%<i class="feather icon-arrow-up text-c-green"></i></h4>
+          <span>Bounce Rate</span>
+        </div>
+      </div>
+      <app-apex-chart chartID="chart-apex-site-visitor" [chartConfig]="this.siteVisitorCAC" [newData]="this.data"></app-apex-chart>
+    </app-card>
+  </div>
+  <div class="col-xl-4 col-md-12">
+    <app-card [hidHeader]="true">
+      <h3>20500</h3>
+      <p class="text-muted">Site Analysis</p>
+      <app-apex-chart chartID="seo-analytics-1" [chartConfig]="this.seoAnalyticsChartData"></app-apex-chart>
+    </app-card>
+    <app-card [hidHeader]="true" cardClass="bg-c-blue text-white widget-visitor-card" blockClass="text-center">
+      <h2 class="text-white">5,678</h2>
+      <h6 class="text-white">Daily visitor</h6>
+      <i class="feather icon-file-text"></i>
+    </app-card>
+    <app-card [hidHeader]="true" cardClass="bg-c-yellow text-white widget-visitor-card" blockClass="text-center">
+      <h2 class="text-white">5,678</h2>
+      <h6 class="text-white">Last month visitor</h6>
+      <i class="feather icon-award"></i>
+    </app-card>
+  </div>
+  <!-- real-time data of visits end -->
+
+  <!-- traffic-section start -->
+  <div class="col-lg-6">
+    <app-card cardTitle="Marketing campaign" [options]="false">
+      <app-apex-chart chartID="traffic-chart-1" [chartConfig]="this.trafficChartData"></app-apex-chart>
+    </app-card>
+  </div>
+  <div class="col-lg-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <h3>$16,756</h3>
+          <h6 class="text-muted m-b-0">Visits<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+        </div>
+        <div class="col-6">
+          <app-apex-chart chartID="seo-chart-1" [chartConfig]="this.seoChartData1"></app-apex-chart>
+        </div>
+      </div>
+    </app-card>
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <h3>49.54%</h3>
+          <h6 class="text-muted m-b-0">Bounce Rate<i class="fa fa-caret-up text-c-green m-l-10"></i></h6>
+        </div>
+        <div class="col-6">
+          <app-apex-chart chartID="seo-chart-2" [chartConfig]="this.seoChartData2"></app-apex-chart>
+        </div>
+      </div>
+    </app-card>
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <h3>1,62,564</h3>
+          <h6 class="text-muted m-b-0">Products<i class="fa fa-caret-down text-c-red m-l-10"></i></h6>
+        </div>
+        <div class="col-6">
+          <app-apex-chart chartID="seo-chart-3" [chartConfig]="this.seoChartData3"></app-apex-chart>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <!-- traffic-section end -->
+</div>

@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card [hidHeader]="true" cardClass="user-profile-list">
+        <div class="row align-items-center m-l-0">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6 text-right">
+            <div class="btn-group" ngbDropdown [placement]="'bottom-left'">
+              <button type="button" class="btn btn-primary btn-sm">Selected
+                <span class="badge badge-light">{{selectedCount}}</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm dropdown-toggle-split" [disabled]="selectedCount == 0" ngbDropdownToggle><span
+                  class="sr-only">Toggle Dropdown</span></button>
+              <div ngbDropdownMenu>
+  
+                <a class="dropdown-item" href="javascript:" (click)="activeOrDeactiveallEmail(false,'Active')">Active
+                  </a>
+                <a class="dropdown-item" href="javascript:" (click)="activeOrDeactiveallEmail(true,'Deactive')">Deactive
+                  </a>
+  
+              </div>
+            </div>&nbsp;
+
+            <button class="btn btn-success btn-sm btn-round has-ripple" (click)="openAdd()"><i
+                class="feather icon-plus"></i>
+              Add Email</button>&nbsp;
+            <button class="btn btn-info btn-sm btn-round has-ripple" (click)="refreshRecord()"><i class="fas fa-redo"></i>
+              Refresh </button>
+          </div>
+        </div>
+  
+        <div class="dt-responsive table-responsive">
+          <table datatable class="table table-striped row-border" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" (change)="changeSelection()"
+                      [(ngModel)]="IsSelectAll">
+                    <label class="custom-control-label" for="customCheck1"></label>
+                  </div>
+                </th>
+                <th>Template Code</th>
+                <th>Template Name</th>
+                <th>Subject</th>
+                <th>Active</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of emailList;let i = index">
+                <td>
+
+                  <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="{{i}}" name="example1"
+                      [(ngModel)]="data.IsChecked" (change)="changeSelectionlogic($event)">
+                    <label class="custom-control-label" for="{{i}}"></label>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-inline-block align-middle">
+                    <div class="d-inline-block">
+                      <a href="javascript:void(0)" (click)="edit(data.id)">
+                        <h6 class="m-b-0">{{data.TemplateCode}}</h6>
+                      </a>
+                    </div>
+                  </div>
+                </td>
+                <td>{{data.TemplateName}}</td>
+                <td>{{data.Subject}}</td>
+                <td>
+                  <a href="javascript:void(0)" (click)="setIsActiveRecord(data.IsActive,data)" placement="top"
+                    ngbTooltip="Deactive Email"><span class="badge badge-primary" *ngIf="data.IsActive">Active</span>
+                  </a>
+  
+                  <a href="javascript:void(0)" (click)="setIsActiveRecord(data.IsActive,data)" placement="top"
+                    ngbTooltip="Active Email"> <span class="badge badge-danger" *ngIf="!data.IsActive">Deactive</span>
+                  </a>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-icon btn-outline-success" (click)="edit(data.id)" placement="top"
+                    ngbTooltip="Edit">
+                    <i class="feather icon-edit"></i>
+                  </button>&nbsp;
+                  <button type="button" class="btn btn-icon btn-sm btn-outline-danger" (click)="deleteRecord(data.id)"
+                    placement="top" ngbTooltip="Remove">
+                    <i class="feather icon-trash-2"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+  </div>

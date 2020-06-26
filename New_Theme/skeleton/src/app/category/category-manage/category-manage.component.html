@@ -1,0 +1,22 @@
+<div class="row btn-page">
+    <div class="col-sm-12">
+        <app-card cardClass="test-cl" cardTitle="Manage Category">
+            <div style="margin-top: 20px;">
+                <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class=col-md-12>
+                            <label>Category Name</label>
+                            <angular-editor [config]="config" formControlName="CategoryName"></angular-editor>
+                        </div>
+                    </div>
+                    <div class="row" style="float: right;margin-bottom: 20px;">
+                        <button type="button" class="btn btn-outline-dark btn-md pull-right"
+                            (click)="back()">Back</button>&nbsp;
+                        <button type="submit" class="btn btn-primary btn-md pull-right">Save &
+                            Exit</button>&nbsp;&nbsp;
+                    </div>
+                </form>
+            </div>
+        </app-card>
+    </div>
+</div>

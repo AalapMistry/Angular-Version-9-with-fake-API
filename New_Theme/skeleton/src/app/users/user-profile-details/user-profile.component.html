@@ -1,0 +1,538 @@
+<div class="user-profile user-card mb-4">
+  <!-- <div class="card-header border-0 p-0 pb-0">
+    <div class="cover-img-block">
+      <div class="overlay"></div>
+      <div class="change-cover">
+        <div class="dropdown" ngbDropdown placement="bottom-left">
+          <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"><i class="icon feather icon-camera"></i></a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item" href="javascript:"><i class="feather icon-upload-cloud mr-2"></i>upload new</a>
+            <a class="dropdown-item" href="javascript:"><i class="feather icon-image mr-2"></i>from photos</a>
+            <a class="dropdown-item" href="javascript:"><i class="feather icon-film mr-2"></i> upload video</a>
+            <a class="dropdown-item" href="javascript:"><i class="feather icon-trash-2 mr-2"></i>remove</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="card-body py-0">
+    <div class="user-about-block m-0">
+      <div class="row">
+
+        <div class="col-md-4 text-center mt-n5">
+          <div class="change-profile text-center">
+            <div class="dropdown w-auto d-inline-block" ngbDropdown>
+              <a class="dropdown-toggle" data-toggle="dropdown" ngbDropdownToggle aria-haspopup="true"
+                aria-expanded="false">
+                <div class="profile-dp">
+                  <div class="position-relative d-inline-block">
+                    <img class="img-radius img-fluid wid-100"
+                      *ngIf="!userDetail.ProfileImage || userDetail.ProfileImage =='' "
+                      src="assets/images/user/avatar-5.jpg" alt="User image">
+
+                    <img class="img-radius img-fluid wid-100"
+                      *ngIf="!!userDetail.ProfileImage && userDetail.ProfileImage !='' "
+                      src="{{userDetail.ProfileImage}}" alt="User image">
+
+                  </div>
+                  <div class="overlay">
+                    <span>change</span>
+                  </div>
+                </div>
+                <div class="certificated-badge">
+                  <i class="fas fa-certificate text-c-blue bg-icon"></i>
+                  <i class="fas fa-check front-icon text-white"></i>
+                </div>
+              </a>
+              <!-- <div class="dropdown-menu" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:"><i class="feather icon-upload-cloud mr-2"></i>upload new</a>
+                <a class="dropdown-item" href="javascript:"><i class="feather icon-image mr-2"></i>from photos</a>
+                <a class="dropdown-item" href="javascript:"><i class="feather icon-shield mr-2"></i>Protact</a>
+                <a class="dropdown-item" href="javascript:"><i class="feather icon-trash-2 mr-2"></i>remove</a>
+              </div> -->
+
+            </div>
+          </div>
+          <h5 class="mb-1">{{userDetail.FirstName}} {{userDetail.LastName}}</h5>
+          <!-- <p class="mb-2 text-muted">UI/UX Designer</p> -->
+        </div>
+
+        <div class="col-md-8 mt-md-4">
+
+          <div class="row">
+            <div class="col-md-6">
+              <a href="javascript:" class="mb-1 text-muted d-flex align-items-end text-h-primary"
+                *ngIf="!!userDetail.WebsiteUrl"><i
+                  class="feather icon-globe mr-2 f-18"></i>{{userDetail.WebsiteUrl}}</a>
+              <div class="clearfix"></div>
+              <a href="javascript:" class="mb-1 text-muted d-flex align-items-end text-h-primary"><i
+                  class="feather icon-mail mr-2 f-18"></i>{{userDetail.EmailAddress}}</a>
+              <div class="clearfix"></div>
+              <a href="javascript:" class="mb-1 text-muted d-flex align-items-end text-h-primary"
+                *ngIf="!!userDetail.MobileNumber"><i
+                  class="feather icon-phone mr-2 f-18"></i>{{userDetail.MobileNumber}}</a>
+            </div>
+            <div class="col-md-6">
+              <div class="media" *ngIf="!!userDetail.Address1">
+                <i class="feather icon-map-pin mr-2 mt-1 f-18"></i>
+                <div class="media-body">
+                  <p class="mb-0 text-muted">{{userDetail.Address1}}</p>
+                  <p class="mb-0 text-muted">{{userDetail.Address2}}</p>
+                  <p class="mb-0 text-muted">{{userDetail.PostalCode}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="nav nav-tabs profile-tabs nav-fill" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link text-reset" [ngClass]="{'active': this.activeTab === 'profile'}"
+                (click)="this.activeTab = 'profile'" id="profile-tab" data-toggle="tab" href="javascript:" role="tab"
+                aria-controls="profile" aria-selected="false"><i class="feather icon-user mr-2"></i>Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-reset" [ngClass]="{'active': this.activeTab === 'gallery'}"
+                (click)="this.activeTab = 'gallery'" id="gallery-tab" data-toggle="tab" href="javascript:" role="tab"
+                aria-controls="gallery" aria-selected="false"><i class="feather icon-image mr-2"></i>Gallery</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- profile body start -->
+
+
+
+
+<!-- <div class="row">
+  
+  <div class="col-md-8 order-md-2">
+    <div class="tab-content" id="myTabContent">
+
+
+      <div class="tab-pane fade" [ngClass]="{'show active': this.activeTab === 'profile'}" id="profile" role="tabpanel"
+        aria-labelledby="profile-tab">
+
+        <div class="merge-card">
+          <app-card [hidHeader]="true" cardClass="mb-0" blockClass="d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">Personal details</h5>
+            <button type="button"
+              (click)="this.editProfile = !this.editProfile; this.editProfileIcon = this.editProfile ? 'icon-x': 'icon-edit';"
+              class="btn btn-primary btn-sm rounded m-0 float-right" data-toggle="collapse" data-target=".pro-det-edit"
+              aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
+              <i class="feather" [ngClass]="editProfileIcon"></i>
+            </button>
+          </app-card>
+          <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show" *ngIf="!editProfile">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Full Name</label>
+              <div class="col-sm-9">
+                Lary Doe
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Gender</label>
+              <div class="col-sm-9">
+                Male
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Birth Date</label>
+              <div class="col-sm-9">
+                16-12-1994
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Martail Status</label>
+              <div class="col-sm-9">
+                Unmarried
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Location</label>
+              <div class="col-sm-9">
+                <p class="mb-0 text-muted">4289 Calvin Street</p>
+                <p class="mb-0 text-muted">Baltimore, near MD Tower Maryland,</p>
+                <p class="mb-0 text-muted">Maryland (21201)</p>
+              </div>
+            </div>
+          </app-card>
+          <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show" *ngIf="editProfile">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Full Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Full Name" value="Lary Doe">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Gender</label>
+              <div class="col-sm-9">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input"
+                    checked>
+                  <label class="custom-control-label" for="customRadioInline1">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                  <label class="custom-control-label" for="customRadioInline2">Female</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Birth Date</label>
+              <div class="col-sm-9">
+                <input type="date" class="form-control" value="1994-12-16">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Martail Status</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Select Marital Status</option>
+                  <option>Married</option>
+                  <option selected>Unmarried</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Location</label>
+              <div class="col-sm-9">
+                <textarea
+                  class="form-control">4289 Calvin Street,  Baltimore, near MD Tower Maryland, Maryland (21201)</textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label"></label>
+              <div class="col-sm-9">
+                <button type="button" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </app-card>
+        </div>
+        <div class="merge-card">
+          <app-card [hidHeader]="true" cardClass="mb-0" blockClass="d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">Contact Information</h5>
+            <button type="button"
+              (click)="this.editContact = !this.editContact; this.editContactIcon = this.editContact ? 'icon-x': 'icon-edit';"
+              class="btn btn-primary btn-sm rounded m-0 float-right" data-toggle="collapse" data-target=".pro-det-edit"
+              aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
+              <i class="feather" [ngClass]="editContactIcon"></i>
+            </button>
+          </app-card>
+          <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show" *ngIf="!editContact">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Mobile Number</label>
+              <div class="col-sm-9">
+                +1 9999-999-999
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Email Address</label>
+              <div class="col-sm-9">
+                Demo@domain.com
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Twitter</label>
+              <div class="col-sm-9">
+                @phonixcoded
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Skype</label>
+              <div class="col-sm-9">
+                @phonixcoded demo
+              </div>
+            </div>
+          </app-card>
+          <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show" *ngIf="editContact">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Mobile Number</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Full Name" value="+1 9999-999-999">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Email Address</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Ema" value="Demo@domain.com">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Twitter</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Full Name" value="@phonixcoded">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Skype</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Full Name" value="@phonixcoded demo">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label"></label>
+              <div class="col-sm-9">
+                <button type="button" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </app-card>
+        </div>
+        <div class="merge-card">
+          <app-card [hidHeader]="true" cardClass="mb-0" blockClass="d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">Other Information</h5>
+            <button type="button"
+              (click)="this.editOtherInfo = !this.editOtherInfo; this.editOtherInfoIcon = this.editOtherInfo ? 'icon-x': 'icon-edit';"
+              class="btn btn-primary btn-sm rounded m-0 float-right" data-toggle="collapse" data-target=".pro-det-edit"
+              aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
+              <i class="feather" [ngClass]="editOtherInfoIcon"></i>
+            </button>
+          </app-card>
+          <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show" *ngIf="!editOtherInfo">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Occupation</label>
+              <div class="col-sm-9">
+                Designer
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Skills</label>
+              <div class="col-sm-9">
+                C#, Javascript, Scss
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Jobs</label>
+              <div class="col-sm-9">
+                Codedthemes
+              </div>
+            </div>
+          </app-card>
+          <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show" *ngIf="editOtherInfo">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Occupation</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Full Name" value="Designer">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Skill</label>
+              <div class="col-sm-9">
+                <div class="custom-control custom-checkbox form-check d-inline-block mr-2">
+                  <input type="checkbox" class="custom-control-input" id="pro-wrk-chk-1" checked>
+                  <label class="custom-control-label" for="pro-wrk-chk-1">C#</label>
+                </div>
+                <div class="custom-control custom-checkbox form-check d-inline-block mr-2">
+                  <input type="checkbox" class="custom-control-input" id="pro-wrk-chk-2" checked>
+                  <label class="custom-control-label" for="pro-wrk-chk-2">Javascript</label>
+                </div>
+                <div class="custom-control custom-checkbox form-check d-inline-block mr-2">
+                  <input type="checkbox" class="custom-control-input" id="pro-wrk-chk-3" checked>
+                  <label class="custom-control-label" for="pro-wrk-chk-3">Scss</label>
+                </div>
+                <div class="custom-control custom-checkbox form-check d-inline-block mr-2">
+                  <input type="checkbox" class="custom-control-input" id="pro-wrk-chk-4">
+                  <label class="custom-control-label" for="pro-wrk-chk-4">Html</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label font-weight-bolder">Jobs</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Ema" value="Codedthemes">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label"></label>
+              <div class="col-sm-9">
+                <button type="button" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </app-card>
+        </div>
+      </div>
+
+
+      <div class="tab-pane fade" [ngClass]="{'show active': this.activeTab === 'gallery'}" id="gallery" role="tabpanel"
+        aria-labelledby="gallery-tab">
+        <div class="row text-center">
+          <div class="col-xl-3 col-lg-4 col-sm-6 img-row" *ngFor="let image of albums; let i=index">
+            <img class="img-fluid m-b-10 img-thumbnail bg-white" [src]="image.thumb" (click)="open(i)" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div> -->
+
+
+
+<div class="tab-pane fade" [ngClass]="{'show active': this.activeTab === 'profile'}" id="profile" role="tabpanel"
+  aria-labelledby="profile-tab" *ngIf="this.activeTab === 'profile'">
+
+
+  <div class="row">
+
+
+
+
+    <div class="merge-card col-md-6">
+      <app-card [hidHeader]="true" cardClass="mb-0" blockClass="d-flex align-items-center justify-content-between">
+        <h5 class="mb-0">Personal details</h5>
+        <!-- <button type="button"
+          (click)="this.editProfile = !this.editProfile; this.editProfileIcon = this.editProfile ? 'icon-x': 'icon-edit';"
+          class="btn btn-primary btn-sm rounded m-0 float-right" data-toggle="collapse" data-target=".pro-det-edit"
+          aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
+          <i class="feather" [ngClass]="editProfileIcon"></i>
+        </button> -->
+      </app-card>
+      <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Full Name</label>
+          <div class="col-sm-9">
+            {{userDetail.FirstName}} {{userDetail.LastName}}
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="!!userDetail.Gender">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Gender</label>
+          <div class="col-sm-9">
+            {{userDetail.Gender}}
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="!!userDetail.Age">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Age</label>
+          <div class="col-sm-9">
+            {{userDetail.Age}}
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="!!userDetail.BirthDate">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Birth Date</label>
+          <div class="col-sm-9">
+            {{getDate(userDetail.BirthDate) | date}}
+          </div>
+        </div>
+
+
+
+        <div class="form-group row" *ngIf="!!userDetail.Address1 && !!userDetail.Address2">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Address</label>
+          <div class="col-sm-9">
+            <p class="mb-0 text-muted">{{userDetail.Address1}}</p>
+            <p class="mb-0 text-muted">{{userDetail.Address2}}</p>
+            <p class="mb-0 text-muted">{{userDetail.PostalCode}}</p>
+          </div>
+        </div>
+      </app-card>
+
+    </div>
+
+    <div class="merge-card col-md-6">
+
+      <app-card [hidHeader]="true" cardClass="mb-0" blockClass="d-flex align-items-center justify-content-between">
+        <h5 class="mb-0">Contact Information</h5>
+        <!-- <button type="button"
+          (click)="this.editContact = !this.editContact; this.editContactIcon = this.editContact ? 'icon-x': 'icon-edit';"
+          class="btn btn-primary btn-sm rounded m-0 float-right" data-toggle="collapse" data-target=".pro-det-edit"
+          aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
+          <i class="feather" [ngClass]="editContactIcon"></i>
+        </button> -->
+      </app-card>
+      <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show">
+
+        <div class="form-group row" *ngIf="userDetail.MobileNumber">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Mobile Number</label>
+          <div class="col-sm-9">
+            {{userDetail.MobileNumber}}
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Email Address</label>
+          <div class="col-sm-9">
+            {{userDetail.EmailAddress}}
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="!!userDetail.TwitterUrl">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Twitter</label>
+          <div class="col-sm-9">
+            <a href="{{userDetail.TwitterUrl}}" target="_blank"> {{userDetail.TwitterUrl}}</a>
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="userDetail.LinkedinUrl">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Linkedin</label>
+          <div class="col-sm-9">
+            <a href="{{userDetail.LinkedinUrl}}" target="_blank">{{userDetail.LinkedinUrl}}</a>
+          </div>
+        </div>
+      </app-card>
+
+    </div>
+
+    <div class="merge-card col-md-6">
+
+      <app-card [hidHeader]="true" cardClass="mb-0" blockClass="d-flex align-items-center justify-content-between">
+        <h5 class="mb-0">Other Information</h5>
+        <!-- <button type="button"
+          (click)="this.editOtherInfo = !this.editOtherInfo; this.editOtherInfoIcon = this.editOtherInfo ? 'icon-x': 'icon-edit';"
+          class="btn btn-primary btn-sm rounded m-0 float-right" data-toggle="collapse" data-target=".pro-det-edit"
+          aria-expanded="false" aria-controls="pro-det-edit-1 pro-det-edit-2">
+          <i class="feather" [ngClass]="editOtherInfoIcon"></i>
+        </button> -->
+      </app-card>
+      <app-card [hidHeader]="true" blockClass="border-top pro-det-edit collapse show">
+
+        <div class="form-group row" *ngIf="!!userDetail.AboutUser">
+          <label class="col-sm-3 col-form-label font-weight-bolder">About User</label>
+          <div class="col-sm-9" [innerHtml]="userDetail.AboutUser">
+
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="!!userDetail.Skills">
+          <label class="col-sm-3 col-form-label font-weight-bolder">Skills</label>
+          <div class="col-sm-9">
+            <span *ngFor="let skil of userDetail.Skills">
+              <span class="badge m-r-5 badge-secondary">{{skil.display}}</span>
+            </span>
+
+          </div>
+        </div>
+
+      </app-card>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+<div class="tab-pane fade" [ngClass]="{'show active': this.activeTab === 'gallery'}" id="gallery" role="tabpanel"
+  aria-labelledby="gallery-tab" *ngIf="this.activeTab === 'gallery'">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-xl-3 col-lg-4 col-sm-6 img-row" *ngFor="let image of albums; let i=index">
+        <img class="img-fluid m-b-10 img-thumbnail bg-white" [src]="image.thumb" (click)="open(i)" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- profile body end -->

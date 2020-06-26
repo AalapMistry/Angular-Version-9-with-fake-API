@@ -1,0 +1,60 @@
+<div class="row btn-page">
+    <div class="col-sm-12">
+        <app-card cardClass="test-cl" cardTitle="Manage Email">
+            <div style="margin-top: 20px;">
+                <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">Template Code</label>
+                                <input type="text" class="form-control" id="templateCode" aria-describedby="TemplateCode"
+                                    placeholder="Enter Template Code" formControlName="TemplateCode" [ngClass]="{ 'is-invalid': (getControls('TemplateCode').dirty || getControls('TemplateCode').touched) 
+                                    && getControls('TemplateCode').invalid }" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">Template Name</label>
+                                <input type="text" class="form-control" id="templateName" aria-describedby="TemplateName"
+                                    placeholder="Enter template Name" formControlName="TemplateName" [ngClass]="{ 'is-invalid': (getControls('TemplateName').dirty || getControls('TemplateName').touched) 
+                                    && getControls('TemplateName').invalid }" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input type="text" class="form-control" id="subject" aria-describedby="Subject"
+                                    placeholder="Enter Subject" formControlName="Subject" [ngClass]="{ 'is-invalid': (getControls('Subject').dirty || getControls('Subject').touched) 
+                                    && getControls('Subject').invalid }" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=col-md-12>
+                            <label>Body</label>
+                            <angular-editor [config]="config" formControlName="Body"></angular-editor>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="active"
+                                    formControlName="IsActive">
+                                <label class="custom-control-label" for="active">
+                                    Active</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="float: right;margin-bottom: 20px;">
+                        <button type="button" class="btn btn-outline-dark btn-md pull-right"
+                            (click)="back()">Back</button>&nbsp;
+                        <button type="submit" class="btn btn-primary btn-md pull-right">Save &
+                            Exit</button>&nbsp;&nbsp;
+                    </div>
+                </form>
+            </div>
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,352 @@
+<div class="row btn-page">
+    <div class="col-sm-12">
+        <app-card cardClass="test-cl" cardTitle="Manage User">
+
+            <ngb-tabset>
+
+                <ngb-tab title="PROFILE">
+                    <ng-template ngbTabContent>
+                        <div style="margin-top: 20px;">
+
+                            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+
+                                <div class="row">
+                                    <div class="col-sm-1" *ngIf="!!imageToShow && imageToShow != ''">
+                                        <img src="{{imageToShow}}" alt="" width="70" height="60"
+                                            style="border-radius: 50%;">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                    accept="image/*" (change)="changeListener($event.target.files)">
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose Profile
+                                                    Image</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName">First Name</label>
+                                            <input type="text" class="form-control" id="firstName"
+                                                aria-describedby="firstName" placeholder="Enter First Name"
+                                                formControlName="FirstName" [ngClass]="{ 'is-invalid': (getControls('FirstName').dirty || getControls('FirstName').touched) 
+                                                && getControls('FirstName').invalid }" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="lastName">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName"
+                                                aria-describedby="lastName" placeholder="Enter Last Name"
+                                                formControlName="LastName" [ngClass]="{ 'is-invalid': (getControls('LastName').dirty || getControls('LastName').touched) 
+                                                && getControls('LastName').invalid }" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" aria-describedby="email"
+                                                placeholder="Enter Email" formControlName="EmailAddress" [ngClass]="{ 'is-invalid': (getControls('EmailAddress').dirty || getControls('EmailAddress').touched) 
+                                                && getControls('EmailAddress').invalid }" required [readonly]="isEdit">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <select class="form-control" id="gender" formControlName="Gender" [ngClass]="{ 'is-invalid': (getControls('Gender').dirty || getControls('Gender').touched) 
+                                            && getControls('Gender').invalid }" required>
+                                                <option value="" disabled>Select Gender</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="age">Age</label>
+                                            <input type="number" class="form-control" id="age" aria-describedby="age"
+                                                placeholder="Enter Age" formControlName="Age" [ngClass]="{ 'is-invalid': (getControls('Age').dirty || getControls('Age').touched) 
+                                                && getControls('Age').invalid }" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" *ngIf="!isEdit">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <input [type]="hide ? 'password' : 'text'" class="form-control" id="pass"
+                                                aria-describedby="pass" placeholder="Enter Password"
+                                                formControlName="Password" [ngClass]="{ 'is-invalid': (getControls('Password').dirty || getControls('Password').touched) 
+                                                && getControls('Password').invalid }" required>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button" (click)="hide = !hide">
+                                                    <i class="fa fa-eye" *ngIf="hide"></i>
+                                                    <i class="fa fa-eye-slash" *ngIf="!hide"></i>
+                                                </button>
+
+                                            </div>
+                                            <small class="text-info">A minimum 8 characters password contains a
+                                                combination of
+                                                uppercase and
+                                                lowercase letter and number are required.</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="cpass">Confirm Password</label>
+                                            <input type="password" class="form-control" id="cpass"
+                                                aria-describedby="cpass" placeholder="Enter Confirm Password"
+                                                formControlName="ConfirmPassword" [ngClass]="{ 'is-invalid': (getControls('ConfirmPassword').dirty || getControls('ConfirmPassword').touched) 
+                                                && getControls('ConfirmPassword').invalid }" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label for="dates">Birth Date</label>
+                                            <div class="input-group">
+                                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                                    ngbDatepicker #d="ngbDatepicker" formControlName="BirthDate"
+                                                    [ngClass]="{ 'is-invalid': (getControls('BirthDate').dirty || getControls('BirthDate').touched) 
+                                                    && getControls('BirthDate').invalid }" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" (click)="d.toggle()">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Skills</label>
+                                        <tag-input name="skill" formControlName='Skills'></tag-input>
+                                        <small class="text-info">Press enter after typing skill.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class=col-md-12>
+                                        <label>About User</label>
+                                        <angular-editor [config]="config" formControlName="AboutUser"></angular-editor>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="address1">Address 1</label>
+                                            <textarea class="form-control" id="address1" rows="1"
+                                                formControlName="Address1" [ngClass]="{ 'is-invalid': (getControls('Address1').dirty || getControls('Address1').touched) 
+                                            && getControls('Address1').invalid }" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="address2">Address 2</label>
+                                            <textarea class="form-control" id="address2" rows="1"
+                                                formControlName="Address2" [ngClass]="{ 'is-invalid': (getControls('Address2').dirty || getControls('Address2').touched) 
+                                            && getControls('Address2').invalid }" required></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="mobile">Mobile Number</label>
+                                            <input type="text" class="form-control" id="mobile"
+                                                aria-describedby="mobile" placeholder="Enter Mobile No"
+                                                formControlName="MobileNumber" [ngClass]="{ 'is-invalid': (getControls('MobileNumber').dirty || getControls('MobileNumber').touched) 
+                                                && getControls('MobileNumber').invalid }" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="postal">Postal Code</label>
+                                            <input type="text" class="form-control" id="postal"
+                                                aria-describedby="postal" placeholder="Enter Postalcode"
+                                                formControlName="PostalCode" [ngClass]="{ 'is-invalid': (getControls('PostalCode').dirty || getControls('PostalCode').touched) 
+                                                && getControls('PostalCode').invalid }" required>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="website">Website url</label>
+                                            <input type="url" class="form-control" id="website"
+                                                aria-describedby="website" placeholder="Enter website url"
+                                                formControlName="WebsiteUrl"
+                                                [ngClass]="{'is-invalid':  getControls('WebsiteUrl').invalid }">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="twitter">Twitter url</label>
+                                            <input type="text" class="form-control" id="twitter"
+                                                aria-describedby="twitter" placeholder="Enter twitter url"
+                                                formControlName="TwitterUrl"
+                                                pattern="(ftp|http|https):\/\/?(?:www\.)?twitter.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&amp;%@!\-\/]))?"
+                                                [ngClass]="{'is-invalid':  getControls('TwitterUrl').invalid }">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="linkedin">Linkedin url</label>
+                                            <input type="url" class="form-control" id="linkedin"
+                                                aria-describedby="twitter" placeholder="Enter linkedin url"
+                                                formControlName="LinkedinUrl"
+                                                pattern="(ftp|http|https):\/\/?(?:www\.)?linkedin.com(\w+:{0,1}\w*@)?(\S+)(:([0-9])+)?(\/|\/([\w#!:.?+=&amp;%@!\-\/]))?"
+                                                [ngClass]="{'is-invalid':  getControls('LinkedinUrl').invalid }">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="active"
+                                                formControlName="IsActive">
+                                            <label class="custom-control-label" for="active">
+                                                Active</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row" style="float: right;margin-bottom: 20px;">
+
+                                    <button type="button" class="btn btn-outline-dark btn-md pull-right"
+                                        (click)="back()">Back</button>&nbsp;
+                                    <button type="submit" class="btn btn-primary btn-md pull-right"
+                                        (click)="save()">Save</button>&nbsp;
+                                    <button type="submit" class="btn btn-primary btn-md pull-right"
+                                        (click)="saveandexit()">Save &
+                                        Exit</button>&nbsp;
+
+
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+
+
+                <ngb-tab title="GALLERY" [disabled]="userId == 0">
+                    <ng-template ngbTabContent>
+
+
+
+                        <div class="row" style="margin-top: 25px;">
+
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="gender">Gallery Type</label>
+                                    <select class="form-control" id="gallery" [(ngModel)]="galleryType" name="gallery"
+                                        (change)="changeGalleryType()">
+                                        <option value="" disabled>Select Type</option>
+                                        <option value="Images/Photos">Images/Photos</option>
+                                        <option value="Other Documents">Other Documents</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row text-center" style="margin-top: 30px;"
+                            *ngIf="!!galleryType && galleryType == 'Images/Photos'">
+
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile02"
+                                            accept="image/*" (change)="onSelectFile($event)" multiple>
+                                        <label class="custom-file-label" for="inputGroupFile02">Choose Profile
+                                            Image</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="galleryType == 'Images/Photos' && galleryImageData.length >=1">
+
+                            <div class="col-md-12">
+                                <span *ngFor='let url of galleryImageData'>
+                                    <span class="img-wrap">
+                                        <span class="close" (click)="removeImage(url)">&times;</span>
+                                        <img [src]="url.userGalleryData.fileData" height="150" width="150" data-id="123"
+                                            accept="image/*">&nbsp;&nbsp;
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="galleryImageData.length >= 1" style="margin-top: 25px;">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2 text-center">
+                                <button class="btn btn-block btn-sm btn-primary" (click)="uploadGalleryData()"> Upload
+                                    Data</button>
+                                <button type="button" class="btn btn-sm btn-outline-dark btn-md pull-right"
+                                    (click)="back()">Back</button>&nbsp;
+
+                            </div>
+                            <div class="col-md-5"></div>
+                        </div>
+
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+
+
+
+
+
+
+        </app-card>
+    </div>
+
+
+
+</div>

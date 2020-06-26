@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <app-card [hidHeader]="true" cardClass="user-profile-list">
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+
+
+
+
+          <div class="btn-group" ngbDropdown [placement]="'bottom-left'">
+            <button type="button" class="btn btn-primary btn-sm">Selected
+              <span class="badge badge-light">{{selectedCount}}</span>
+            </button>
+            <button type="button" class="btn btn-primary btn-sm dropdown-toggle-split" [disabled]="selectedCount == 0" ngbDropdownToggle><span
+                class="sr-only">Toggle Dropdown</span></button>
+            <div ngbDropdownMenu>
+
+              <a class="dropdown-item" href="javascript:" (click)="activeOrDeactiveallUser(false,'Active')">Active
+                </a>
+              <a class="dropdown-item" href="javascript:" (click)="activeOrDeactiveallUser(true,'Deactive')">Deactive
+                </a>
+
+            </div>
+          </div>&nbsp;
+
+
+
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="openAdd()"><i
+              class="feather icon-plus"></i>
+            Add User</button>&nbsp;
+          <button class="btn btn-info btn-sm btn-round has-ripple" (click)="refreshRecord()"><i class="fas fa-redo"></i>
+            Refresh </button>
+        </div>
+      </div>
+
+      <div class="dt-responsive table-responsive">
+        <table datatable class="table table-striped row-border" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+          <thead>
+            <tr>
+              <th>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" (change)="changeSelection()"
+                    [(ngModel)]="IsSelectAll">
+                  <label class="custom-control-label" for="customCheck1"></label>
+                </div>
+              </th>
+              <th>User Detail</th>
+              <th>Mobile Number</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Birth Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+
+            </tr>
+
+          </thead>
+
+
+
+          <tbody>
+            <tr *ngFor="let data of userList;let i = index">
+              <td>
+
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="{{i}}" name="example1"
+                    [(ngModel)]="data.IsChecked" (change)="changeSelectionlogic($event)">
+                  <label class="custom-control-label" for="{{i}}"></label>
+                </div>
+              </td>
+
+              <td>
+                <div class="d-inline-block align-middle">
+
+                  <img src="assets/images/user/avatar-2.jpg" alt="user image" class="img-radius align-top m-r-15"
+                    style="width:40px;" *ngIf="!data.ProfileImage || data.ProfileImage == ''">
+
+                  <img src="{{data.ProfileImage}}" alt="user image" class="img-radius align-top m-r-15" height="40"
+                    width="40" *ngIf="!!data.ProfileImage && data.ProfileImage != ''">
+
+                  <div class="d-inline-block">
+                    <a href="javascript:void(0)" (click)="gotoProfile(data.id)">
+                      <h6 class="m-b-0">{{data.FirstName}} {{data.LastName}}</h6>
+                    </a>
+                    <p class="m-b-0">{{data.EmailAddress}}</p>
+                  </div>
+                </div>
+              </td>
+              <td>{{data.MobileNumber}}</td>
+              <td>{{data.Gender}}</td>
+              <td>{{data.Age}}</td>
+              <td>{{getDate(data.BirthDate)  | date}}</td>
+
+              <td>
+                <a href="javascript:void(0)" (click)="setIsActiveRecord(data.IsActive,data)" placement="top"
+                  ngbTooltip="Deactive User"><span class="badge badge-primary" *ngIf="data.IsActive">Active</span>
+                </a>
+
+                <a href="javascript:void(0)" (click)="setIsActiveRecord(data.IsActive,data)" placement="top"
+                  ngbTooltip="Active User"> <span class="badge badge-danger" *ngIf="!data.IsActive">Deactive</span>
+                </a>
+              </td>
+
+              <td>
+
+
+                <button type="button" class="btn btn-icon btn-outline-success" (click)="edit(data.id)" placement="top"
+                  ngbTooltip="Edit">
+                  <i class="feather icon-edit"></i>
+                </button>&nbsp;
+                <button type="button" class="btn btn-icon btn-sm btn-outline-danger" (click)="deleteRecord(data.id)"
+                  placement="top" ngbTooltip="Remove">
+                  <i class="feather icon-trash-2"></i>
+                </button>
+
+                <!-- <div class="overlay-edit">
+
+                  <button type="button" class="btn btn-icon btn-warning" *ngIf="!data.IsActive"
+                    (click)="setIsActiveRecord(data.IsActive,data)" placement="top" ngbTooltip="Active User"><i
+                      class="feather icon-check-circle"></i></button>
+
+                  <button type="button" class="btn btn-icon btn-warning" *ngIf="data.IsActive"
+                    (click)="setIsActiveRecord(data.IsActive,data)" placement="top" ngbTooltip="Deactive User"><i
+                      class="feather icon-x-circle"></i></button>
+
+                  <button type="button" class="btn btn-icon btn-success" (click)="edit(data.id)" placement="top"
+                    ngbTooltip="Edit">
+                    <i class="feather icon-edit-2"></i></button>
+                  <button type="button" class="btn btn-icon btn-danger" (click)="deleteRecord(data.id)" placement="top"
+                    ngbTooltip="Remove">
+                    <i class="feather icon-trash-2"></i></button>
+                </div> -->
+
+              </td>
+            </tr>
+
+          </tbody>
+
+
+
+
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

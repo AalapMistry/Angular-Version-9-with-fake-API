@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-sm-12">
+      <app-card [hidHeader]="true" cardClass="user-profile-list">
+        <div class="row align-items-center m-l-0">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6 text-right">
+            <button class="btn btn-success btn-sm btn-round has-ripple" (click)="openAdd()"><i
+                class="feather icon-plus"></i>
+              Add Product</button>&nbsp;
+            <button class="btn btn-info btn-sm btn-round has-ripple" (click)="refreshRecord()"><i class="fas fa-redo"></i>
+              Refresh </button>
+          </div>
+        </div>
+  
+        <div class="dt-responsive table-responsive">
+          <table datatable class="table table-striped row-border" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of productList;let i = index">
+                <td>
+                  <div class="d-inline-block align-middle">
+                    <div class="d-inline-block">
+                      <a href="javascript:void(0)" (click)="edit(data.id)">
+                        <h6 class="m-b-0">{{data.ProductName}}</h6>
+                      </a>
+                    </div>
+                  </div>
+                </td>
+                <td>{{data.Stock}}</td>
+                <td>{{data.Price}}</td>
+                <td>
+                  <button type="button" class="btn btn-icon btn-outline-success" (click)="edit(data.id)" placement="top"
+                    ngbTooltip="Edit">
+                    <i class="feather icon-edit"></i>
+                  </button>&nbsp;
+                  <button type="button" class="btn btn-icon btn-sm btn-outline-danger" (click)="deleteRecord(data.id)"
+                    placement="top" ngbTooltip="Remove">
+                    <i class="feather icon-trash-2"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </app-card>
+    </div>
+  </div>
